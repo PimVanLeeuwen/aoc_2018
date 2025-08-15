@@ -1,25 +1,28 @@
+"""Module for day 2 of Advent of Code (by Pim van Leeuwen)"""
 def solve_part1(input_data):
+    """Solve part 1 of the Advent of Code Day"""
     exactly_two = 0
     exactly_three = 0
 
-    for id in input_data.split("\n"):
+    for i in input_data.split("\n"):
         two, three = False, False
 
         # Check the requirements for the IDs
         # Added requirements for the counting only once per id
-        for c in set(id):
-            if id.count(c) == 2 and two == False:
+        for c in set(i):
+            if i.count(c) == 2 and not two:
                 two = True
                 exactly_two += 1
-            if id.count(c) == 3 and three == False:
+            if i.count(c) == 3 and not three:
                 three = True
                 exactly_three += 1
 
     # return checksum
     return exactly_two * exactly_three
 
-# Function to check if two ids are similar, returns the id of the one dissimilarity if that is present
 def similar_inputs(a, b):
+    """Function to check if two ids are similar,
+    returns the id of the one dissimilarity if that is present"""
     one_off = -1
     for i, c in enumerate(a):
         if c != b[i] and one_off == -1:
@@ -29,6 +32,7 @@ def similar_inputs(a, b):
     return one_off
 
 def solve_part2(input_data):
+    """Solve part 2 of the Advent of Code Day"""
     for id1 in input_data.split("\n"):
         for id2 in input_data.split("\n"):
             if id1 == id2:

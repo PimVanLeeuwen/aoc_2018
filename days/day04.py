@@ -1,24 +1,26 @@
-import numpy as np
+"""Module for day 4 of Advent of Code (by Pim van Leeuwen)"""
 
-# Event from the guards
 class Event:
-    def __init__(self, yy, mm, dd, h, m, guard_id, event):
-        self.yy = yy
-        self.mm = mm
-        self.dd = dd
-        self.h = h
-        self.m = m
+    """Event from the guards"""
+    def __init__(self, date, time, guard_id, event):
+        self.yy = date[0]
+        self.mm = date[1]
+        self.dd = date[2]
+        self.h = time[0]
+        self.m = time[1]
         self.guard_id = guard_id
         self.event = event
 
     def __repr__(self):
-        return f"[{self.yy} - {self.mm} - {self.dd} | {self.h}:{self.m}] Guard: {self.guard_id} Event: {self.event}"
+        return (f"[{self.yy} - {self.mm} - {self.dd} | {self.h}:{self.m}] "
+                f"Guard: {self.guard_id} Event: {self.event}")
 
     def __lt__(self, other):
         return ((int(self.yy), int(self.mm), int(self.dd), int(self.h), int(self.m)) <
                 (int(other.yy), int(other.mm), int(other.dd), int(other.h), int(other.m)))
 
 def process_data(input_data):
+    """Method used for parsing the data, since this is similar for both parts"""
     events = []
 
     # process every line
@@ -38,18 +40,20 @@ def process_data(input_data):
             guard = -1
             event = "fall_asleep"
 
-        events.append(Event(year, month, day, hour, minute, guard, event))
+        events.append(Event((year, month, day), (hour, minute), guard, event))
 
     events.sort()
 
     guards_sleeping = {}
     current_guard = -1
 
-    # go over all the events, if guard changes, we note that, if someone awakens we register the sleeping time
+    # go over all the events, if guard changes, we note that, if someone awakens
+    # we register the sleeping time
     for i, e in enumerate(events):
         if e.guard_id != -1:
             current_guard = e.guard_id
-            if e.guard_id not in guards_sleeping: guards_sleeping[e.guard_id] = [0] * 60
+            if e.guard_id not in guards_sleeping:
+                guards_sleeping[e.guard_id] = [0] * 60
         elif e.event == "wake_up":
             for m in range(int(events[i - 1].m), int(e.m)):
                 guards_sleeping[current_guard][m] += 1
@@ -57,7 +61,7 @@ def process_data(input_data):
     return guards_sleeping
 
 def solve_part1(input_data):
-    # grid of 1000x1000 inches
+    """Solve part 1 of the Advent of Code Day"""
     guards_sleeping = process_data(input_data)
 
     # extract the guard with the highest sum of the entire sleeping schedule
@@ -68,6 +72,7 @@ def solve_part1(input_data):
     return most_minute * most_sleeping
 
 def solve_part2(input_data):
+    """Solve part 2 of the Advent of Code Day"""
     guards_sleeping = process_data(input_data)
 
     # just iterate over all guards cumulative schedules and find max minute

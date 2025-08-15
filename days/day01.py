@@ -1,4 +1,6 @@
+"""Module for day 1 of Advent of Code (by Pim van Leeuwen)"""
 def solve_part1(input_data):
+    """Solve part 1 of the Advent of Code Day"""
     frequency = 0
 
     # add or subtract all numbers in the list
@@ -10,6 +12,7 @@ def solve_part1(input_data):
     return frequency
 
 def solve_part2(input_data):
+    """Solve part 2 of the Advent of Code Day"""
     frequencies = [0]
 
     # Keep adding the frequencies until we find a duplicate
