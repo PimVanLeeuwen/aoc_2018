@@ -25,10 +25,11 @@ def load_input(day: int) -> str:
 def main():
     try:
         day = int(input("Enter day (1–25): "))
-        part = int(input("Enter part (1 or 2): "))
         input_data = load_input(day)
-        result = run_day(day, part, input_data)
-        print(f"\nResult for Day {day:02d} Part {part}:\n{result}")
+        result = run_day(day, 1, input_data)
+        print(f"\nResult for Day {day:02d} Part {1}:\n{result}")
+        result = run_day(day, 2, input_data)
+        print(f"\nResult for Day {day:02d} Part {2}:\n{result}")
     except Exception as e:
         print(f"\nError: {e}")
 

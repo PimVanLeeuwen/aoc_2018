@@ -21,6 +21,10 @@ def neighbors_8(y, x, rows, cols):
 def extract_ints(s):
     return list(map(int, re.findall(r'-?\d+', s)))
 
+# Extract all single uppercase letters from a string.
+def extract_letters(s):
+    return re.findall(r'\b([A-Z])\b', s)
+
 # product of all items in a list
 def prod_list(lst):
     return prod(lst)
