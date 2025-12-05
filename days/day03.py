@@ -1,6 +1,12 @@
 """Module for day 3 of Advent of Code (by Pim van Leeuwen)"""
 import numpy as np
 
+def solve(input_data):
+    """Solve both parts of the Advent of Code Day"""
+    part1 = solve_part1(input_data)
+    part2 = solve_part2(input_data)
+    return part1, part2
+
 class Sheet:
     """Sheet object to gather all data from the input"""
     def __init__(self, sheet_id, pos, w, h):

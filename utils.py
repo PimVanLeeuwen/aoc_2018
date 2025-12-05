@@ -34,7 +34,7 @@ def manhattan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def read_input(day: int) -> str:
-    with open(f'inputs/day{day:02d}.txt', 'r') as file:
+    with open(f'.inputs/day{day:02d}.txt', 'r') as file:
         return file.read()
 
 #read input lines

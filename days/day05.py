@@ -1,6 +1,12 @@
 """Module for day 5 of Advent of Code (by Pim van Leeuwen)"""
 from xmlrpc.client import MAXINT
 
+def solve(input_data):
+    """Solve both parts of the Advent of Code Day"""
+    part1 = solve_part1(input_data)
+    part2 = solve_part2(input_data)
+    return part1, part2
+
 class Node:
     """We will solve this using a doubly linked list"""
     def __init__(self, data):

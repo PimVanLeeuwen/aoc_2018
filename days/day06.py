@@ -1,6 +1,11 @@
 """Module for day 6 of Advent of Code (by Pim van Leeuwen)"""
 from utils import read_lines
 
+def solve(input_data):
+    """Solve both parts of the Advent of Code Day"""
+    part1 = solve_part1(input_data)
+    part2 = solve_part2(input_data)
+    return part1, part2
 
 def solve_part1(input_data):
     """Solve part 1 of the Advent of Code Day"""

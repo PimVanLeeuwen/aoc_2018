@@ -1,5 +1,11 @@
 """Module for day 4 of Advent of Code (by Pim van Leeuwen)"""
 
+def solve(input_data):
+    """Solve both parts of the Advent of Code Day"""
+    part1 = solve_part1(input_data)
+    part2 = solve_part2(input_data)
+    return part1, part2
+
 class Event:
     """Event from the guards"""
     def __init__(self, date, time, guard_id, event):

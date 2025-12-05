@@ -1,37 +1,17 @@
-import importlib
-import os
+import sys
+import time
+from importlib import import_module
 
-# Dynamically find the correct file for the python rendering
-def run_day(day: int, part: int, input_data: str) -> str:
-    try:
-        module_name = f"days.day{day:02d}"
-        day_module = importlib.import_module(module_name)
-        func_name = f"solve_part{part}"
-        solve_func = getattr(day_module, func_name)
-        return solve_func(input_data)
-    except ModuleNotFoundError:
-        return f"Day {day:02d} not implemented."
-    except Exception as e:
-        return f"Error running Day {day:02d} Part {part}: {e}"
+from utils import read_input
 
-# load the input
-def load_input(day: int) -> str:
-    input_path = os.path.join(".inputs", f"day{day:02d}.txt")
-    if not os.path.exists(input_path):
-        raise FileNotFoundError(f"Input file not found: {input_path}")
-    with open(input_path, "r") as f:
-        return f.read().strip()
+def run_day(day_to_run: int):
+    input_data = read_input(day_to_run)
+    day_module = import_module(f'days.day{day_to_run:02d}')
+    start = time.time()
+    result = day_module.solve(input_data)
+    elapsed = time.time() - start
+    print(f'\033[92mDay {day_to_run:02d} result ({elapsed:.3f}s): \n {result}\033[0m')
 
-def main():
-    try:
-        day = int(input("Enter day (1–25): "))
-        input_data = load_input(day)
-        result = run_day(day, 1, input_data)
-        print(f"\nResult for Day {day:02d} Part {1}:\n{result}")
-        result = run_day(day, 2, input_data)
-        print(f"\nResult for Day {day:02d} Part {2}:\n{result}")
-    except Exception as e:
-        print(f"\nError: {e}")
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    day = int(sys.argv[1]) if len(sys.argv) > 1 else 1
+    run_day(day)
